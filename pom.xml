@@ -31,6 +31,17 @@
 
   </properties>
 
+     <distributionManagement>
+    <repository>
+      <id>deploymentRepo</id>
+      <name>MyCo Internal Repository</name>
+      <url>https://volod.jfrog.io/volod/example-repo-local</url>
+    </repository>
+  </distributionManagement>
+
+
+    
+    
   <dependencies>
     <!-- Spring and Spring Boot dependencies -->
     <dependency>
