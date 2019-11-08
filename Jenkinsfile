@@ -25,7 +25,7 @@ pipeline {
                			                        "files": [
                	     		                           {
                 		                                "pattern": "*.jar",
-                   	                                	"target": example-repo-local/"
+                   	                                	"target": "example-repo-local/"
                              		                   }
                              				         ]
 					 		  }
