@@ -5,7 +5,7 @@ pipeline {
        		  git 'Default'
        		  maven 'Maven-3-6-1'
              }
-              stages  					{
+              stages{
              	  stage('Clone')
                       {
                     	steps{
@@ -14,28 +14,24 @@ pipeline {
                       }
               	     stage('Build') 
                       {
-                    	steps 
-                        	{
+                         steps{
                     		sh 'mvn package'
-                            }
+                              }
                       }
-             		 stage('Deploy') 
-                      {
-                    	steps 
-                        	{
-                      			rtUpload (    
-                    			serverId: 'jfrog',
-                    			spec: '''{
-               					     "files": [
-               	     					 {
-                					   		 "pattern": "*.jar".
-                   						 	 "target": example-repo-local/"
-                             		     }
-                             				  ]
-										 }
-                                         '''
-                                  )
+                      stage('Deploy'){
+                    	  steps{
+                      		rtUpload (    
+                    		serverId: 'jfrog',spec: '''{
+               			                        "files": [
+               	     		                           {
+                		                                "pattern": "*.jar".
+                   	                                	"target": example-repo-local/"
+                             		                   }
+                             				         ]
+					 		  }
+                                                       '''
+                                        )
+                             }
                             }
-                      }
-                    }
+           }
 }
