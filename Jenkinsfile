@@ -5,15 +5,12 @@ pipeline {
        		  git 'Default'
        		  maven 'Maven-3-6-1'
              }
-              stages 
-  					{
-             		 stage('Clone')
+              stages  					{
+             	  stage('Clone')
                       {
-                    	steps 
-                        	{
-                          		git branch: 'master'
-                          		url: 'https://github.com/VovaRipetsky/spring-petclinic/'
-                            }
+                    	steps{
+                               gitbranch: 'master', url: 'https://github.com/VovaRipetsky/spring-petclinic/'
+                             }
                       }
               	     stage('Build') 
                       {
