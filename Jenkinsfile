@@ -24,7 +24,7 @@ pipeline {
                     		serverId: 'jfrog',spec: '''{
                			                        "files": [
                	     		                           {
-                		                                "pattern": "*.jar".
+                		                                "pattern": "*.jar",
                    	                                	"target": example-repo-local/"
                              		                   }
                              				         ]
