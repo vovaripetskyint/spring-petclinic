@@ -18,15 +18,17 @@ pipeline {
                     		sh 'mvn package'
                               }
                       }
-                      stage('Build by docker'){
+                      stage('Build by docker')
+                      {
                     	  steps{
                       		dockerfile {
                                 filename 'Dockerfile'
                                 label 'my-defined-label'
                                 registryUrl '676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp'
                                 registryCredentialsId 'AKIAZ3FTK4G7KSIDNPZP'
-                                        }
+                                         }
                                 }
+                      }
 
-                       }
+                   }
 }
