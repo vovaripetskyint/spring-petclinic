@@ -3,7 +3,7 @@ pipeline {
         tools
              {
        		  git 'Default'
-       		  maven 'Maven-3-6-1'
+       		  maven 'Maven'
              }
               stages{
              	  stage('Clone repository')
