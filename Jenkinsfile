@@ -6,32 +6,27 @@ pipeline {
        		  maven 'Maven-3-6-1'
              }
               stages{
-             	  stage('Clone')
+             	  stage('Clone repository')
                       {
                     	steps{
                                git branch: 'master', url: 'https://github.com/VovaRipetsky/spring-petclinic/'
                              }
                       }
-              	     stage('Build') 
+              	     stage('Build by maven') 
                       {
                          steps{
                     		sh 'mvn package'
                               }
                       }
-                      stage('Deploy'){
+                      stage('Build by docker'){
                     	  steps{
-                      		rtUpload (    
-                    		serverId: 'jfrog',spec: '''{
-               			                        "files": [
-               	     		                           {
-                		                                "pattern": "*.jar",
-                   	                                	"target": "example-repo-local/"
-                             		                   }
-                             				         ]
-					 		  }
-                                                       '''
-                                        )
-                               }
-                                    }
-           }
+                      		dockerfile {
+                                filename 'Dockerfile'
+                                label 'my-defined-label'
+                                registryUrl '676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp'
+                                registryCredentialsId 'AKIAZ3FTK4G7KSIDNPZP'
+                                        }
+                                }
+
+                       }
 }
