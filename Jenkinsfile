@@ -12,23 +12,24 @@ pipeline {
                                git branch: 'master', url: 'https://github.com/VovaRipetsky/spring-petclinic/'
                              }
                       }
-              	     stage('Build by maven') 
+                  stage('Build by maven') 
                       {
                          steps{
                     		sh 'mvn package'
                               }
                       }
-                      stage('Build by docker')
+                   stage('Build by docker')
                       {
                     	  steps{
-                      		dockerfile {
-                                filename 'Dockerfile'
-                                label 'my-defined-label'
-                                registryUrl '676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp'
-                                registryCredentialsId 'AKIAZ3FTK4G7KSIDNPZP'
-                                         }
+                                sh '$(aws ecr get-login --no-include-email --region us-east-2)' 
+                                sh 'docker build -t myapp .'
+                                sh 'docker tag myapp:latestpipe 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:latestpipe'  
+                                sh 'docker push 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:latestpipe'
                                 }
-                      }
+                              
+                       }
+                      
+                    }
 
-                   }
+               
 }
