@@ -16,6 +16,7 @@ pipeline {
                       {
                          steps{
                     		sh 'mvn package'
+                                sh 'cp /var/lib/jenkins/workspace/BuildSpringApp_Pipeline/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar /var/lib/jenkins/workspace/BuildSpringApp_Pipeline/src'
                               }
                       }
                    stage('Build by docker')
