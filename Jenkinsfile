@@ -21,7 +21,7 @@ pipeline {
                    stage('Build by docker')
                       {
                     	  steps{
-                                  dir(.){
+                                  dir(/){
                                 sh '$(aws ecr get-login --no-include-email --region us-east-2)' 
                                 sh 'docker build -t myapp .'
                                 sh 'docker tag myapp 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:latestpipe'  
