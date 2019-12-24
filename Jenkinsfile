@@ -21,7 +21,7 @@ pipeline {
                    stage('Build by docker')
                       {
                     	  steps{
-                                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws keys', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]){
+                                withCredentials([[$class: 'AWS Credentials', credentialsId: 'aws keys', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]){
     
                                 sh '$(aws ecr get-login --no-include-email --region us-east-2)' 
                                 sh 'docker build -t myapp .'
