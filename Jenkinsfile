@@ -24,9 +24,9 @@ pipeline {
                     	  steps{
                                   dir('src'){sh 'docker build -t myapp .'}
 
-                              /*   sh '$(aws ecr get-login --no-include-email --region us-east-2)' 
-                                sh 'docker tag myapp 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:latestpipe'  
-                                sh 'docker push 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:latestpipe'*/
+                                sh '$(aws ecr get-login --no-include-email --region us-east-2)' 
+                                sh 'docker tag myapp:latest 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:latestpipe'  
+                                sh 'docker push 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:latestpipe'
                                   } 
                       }
                        
