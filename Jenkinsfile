@@ -1,5 +1,5 @@
 pipeline {
-        agent none
+      agent { label 'docker_slave' }
         tools
              {
        		  git 'Default'
@@ -8,10 +8,9 @@ pipeline {
               stages{
              	  
                       stage('DockerCompose'){
-                      agent { label 'docker_slave' }
                          steps{
-                                sh 'pwd'
                                 sh 'touch /home/ubuntu/test.txt'
+                                sh 'echo `pwd`'
                               }
                       }
                       		
