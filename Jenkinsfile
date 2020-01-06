@@ -25,7 +25,13 @@ pipeline {
 
                               }
                       }
-                    	  
+                      stage('DockerCompose'){
+                      agent { label 'docker-compose' }
+                         steps{
+                                cd /home/ubuntu/docker-composes 
+                    		sh 'docker-compose up'
+                              }
+                      }
                       		
                      }
            }
