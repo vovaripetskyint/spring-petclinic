@@ -31,8 +31,8 @@ pipeline {
                       stage('DockerCompose'){
                       agent { label 'docker_slave' }
                          steps{
-                                sh 'docker-compose -f /home/ubuntu/docker-composes/java/docker-compose.yml up -d'
-                                sh 'docker-compose -f /home/ubuntu/docker-composes/java/docker-compose.yml restart'
+                                sh 'docker-compose -f /home/ubuntu/docker-composes/java/docker-compose-java.yml up -d'
+                                sh 'docker-compose -f /home/ubuntu/docker-composes/java/docker-compose-java.yml restart'
 
                               }
                       }
