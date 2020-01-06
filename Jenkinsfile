@@ -11,7 +11,7 @@ pipeline {
                          steps{
                                script {
     sh """ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.210 << EOF 
-    sh 'docker-compose -f /home/ubuntu/docker-composes/docker-compose.yml up -d'
+    sh 'docker-compose up -d'
     exit
     EOF"""
                                       }
