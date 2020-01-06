@@ -9,29 +9,18 @@ pipeline {
              	  stage('Clone')
                       {
                     	steps{
-                               git branch: 'master', url: 'https://github.com/VovaRipetsky/spring-petclinic/'
+                               git branch: 'compose', url: 'https://github.com/VovaRipetsky/spring-petclinic/'
                              }
                       }
               	     stage('Build') 
                       {
                          steps{
-                    		sh 'mvn package'
+                    		sh 'mvn clean package'
                               }
                       }
-                      stage('Deploy'){
-                    	  steps{
-                      		rtUpload (    
-                    		serverId: 'jfrog',spec: '''{
-               			                        "files": [
-               	     		                           {
-                		                                "pattern": "*.jar",
-                   	                                	"target": "example-repo-local/"
-                             		                   }
-                             				         ]
-					 		  }
-                                                       '''
-                                        )
-                               }
-                                    }
+                      
+                    	  
+                      		
+                     }
            }
 }
