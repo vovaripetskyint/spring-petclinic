@@ -26,7 +26,7 @@ pipeline {
                               }
                       }
                       stage('DockerCompose'){
-                      agent { label 'docker-compose' }
+                      agent { label 'docker_slave' }
                          steps{
                                 sh  'cd /home/ubuntu/docker-composes' 
                     		sh 'docker-compose up'
