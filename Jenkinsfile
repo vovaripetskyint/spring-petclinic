@@ -6,19 +6,19 @@ pipeline {
        		  maven 'maven'
              }
               stages{
-             	  stage('Clone'){
+             	  stage('Clone Git JAR'){
                   agent { label 'master' }
                     	steps{
                                git branch: 'compose', url: 'https://github.com/VovaRipetsky/spring-petclinic/'
                              }
                       }
-              	     stage('Build&Test'){
+              	     stage('Build&Test JAR'){
                      agent { label 'master' }
                          steps{
                     		sh 'mvn clean package'
                               }
                       }
-                      stage('Deploy'){
+                      stage('Deploy JAR'){
                       agent { label 'master' }
                          steps{
                         sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipe_mvn_jar/target/*.jar ubuntu@172.31.24.91:/home/ubuntu/docker-composes'
@@ -26,19 +26,19 @@ pipeline {
                               }
                       }
                       
-                      stage('Clone'){
+                      stage('Clone Git WAR'){
                   agent { label 'master' }
                     	steps{
                                git branch: 'compose', url: 'https://github.com/VovaRipetsky/spring-framework-petclinic.git'
                              }
                       }
-              	     stage('Build&Test'){
+              	     stage('Build&Test WAR'){
                      agent { label 'master' }
                          steps{
                     		sh 'mvn clean package'
                               }
                       }
-                      stage('Deploy'){
+                      stage('Deploy WAR'){
                       agent { label 'master' }
                          steps{
                         sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipe_mvn_jar/target/*.war ubuntu@172.31.24.91:/home/ubuntu/docker-composes'
