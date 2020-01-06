@@ -26,12 +26,10 @@ pipeline {
                               }
                       }
                       
-                      
-                      stages{
-             	  stage('Clone'){
+                      stage('Clone'){
                   agent { label 'master' }
                     	steps{
-                               git branch: 'master', url: 'https://github.com/VovaRipetsky/spring-framework-petclinic.git'
+                               git branch: 'compose', url: 'https://github.com/VovaRipetsky/spring-framework-petclinic.git'
                              }
                       }
               	     stage('Build&Test'){
@@ -56,5 +54,5 @@ pipeline {
                               }
                       }
                       		
-                     
+                     }
            }
