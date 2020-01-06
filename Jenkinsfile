@@ -21,7 +21,7 @@ pipeline {
                       stage('Deploy')
                       {
                          steps{
-                         scp -o  StrictHostKeyChecking=no *.jar ubuntu@172.31.24.91:/home/ubuntu/docker-composes
+                         scp -o StrictHostKeyChecking=no *.jar ubuntu@172.31.24.91:/home/ubuntu/docker-composes
 
                               }
                       }
