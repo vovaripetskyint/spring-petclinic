@@ -1,5 +1,5 @@
 pipeline {
-      agent { label 'docker_slave' }
+        agent none
         tools
              {
        		  git 'Default'
@@ -8,17 +8,12 @@ pipeline {
               stages{
              	  
                       stage('DockerCompose'){
+                      agent { label 'docker_slave' }
                          steps{
-                               script {
-    sh """ssh -o StrictHostKeyChecking=no ubuntu@172.31.33.210 << EOF 
-    sh 'docker-compose up -d'
-    exit
-    EOF"""
-                                      }
-                                
+                                sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.24.91 '
+                                docker-compose -f /home/ubuntu/docker-composes/docker-compose.yml up -d''
                               }
                       }
                       		
                      }
            }
-
