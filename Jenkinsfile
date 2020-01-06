@@ -21,7 +21,7 @@ pipeline {
                       stage('Deploy')
                       {
                          steps{
-                        sh 'scp -i /home/ubuntu/.ssh/id_rsa -o StrictHostKeyChecking=no *.jar ubuntu@172.31.24.91:/home/ubuntu/docker-composes'
+                        sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no *.jar ubuntu@172.31.24.91:/home/ubuntu/docker-composes'
 
                               }
                       }
