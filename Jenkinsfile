@@ -28,8 +28,7 @@ pipeline {
                       stage('DockerCompose'){
                       agent { label 'docker_slave' }
                          steps{
-                                sh  'cd /home/ubuntu/docker-composes' 
-                    		sh 'docker-compose up'
+                                sh 'docker-compose -f /home/ubuntu/docker-composes/docker-compose.yml up -d'
                               }
                       }
                       		
