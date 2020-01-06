@@ -29,7 +29,7 @@ pipeline {
                       stage('Clone Git WAR'){
                   agent { label 'master' }
                     	steps{
-                               git branch: 'compose', url: 'https://github.com/VovaRipetsky/spring-framework-petclinic.git'
+                               git branch: 'master', url: 'https://github.com/VovaRipetsky/spring-framework-petclinic.git'
                              }
                       }
               	     stage('Build&Test WAR'){
