@@ -21,7 +21,7 @@ pipeline {
                       stage('Deploy JAR'){
                       agent { label 'master' }
                          steps{
-                        sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipe_mvn_jar/target/*.jar ubuntu@172.31.24.91:/home/ubuntu/docker-composes/java'
+                        sh 'scp -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipe_mvn_jar/target/*.jar ubuntu@172.31.26.25:/home/ubuntu/docker-composes/java'
 
                               }
                       }
