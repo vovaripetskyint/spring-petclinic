@@ -10,7 +10,8 @@ pipeline {
                       stage('DockerCompose'){
                       agent { label 'docker_slave' }
                          steps{
-                                sh 'touch test.txt'
+                                sh 'pwd'
+                                sh 'touch /home/ubuntu/test.txt'
                               }
                       }
                       		
