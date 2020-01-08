@@ -22,7 +22,7 @@ pipeline {
                       agent { label 'master' }
                          steps{
                         withCredentials([sshUserPrivateKey(credentialsId: "sshdocker", keyFileVariable: 'keyfile')]) {           
-                        sh 'scp -i ${keyfile} -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipe_mvn_jar/target/*.jar ubuntu@172.31.22.238:/home/ubuntu/docker-composes/java'
+                        sh 'scp -i ${keyfile} -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipe_mvn_jar/target/*.jar ubuntu@172.31.44.188:/home/ubuntu/docker-composes/java'
 
                               }
                       }
