@@ -20,21 +20,21 @@ pipeline {
                                 sh 'cp /var/lib/jenkins/workspace/${JOB_NAME}/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar ./'
                               }
                       }
-                   stage('Build by docker')
+                   stage('Build by docker & push')
                       {
                          steps{
                                  script{
-                    	        docker.withRegistry('https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp', 'ecr:us-east-2:ecr') {
+                              	        docker.withRegistry('https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp', 'ecr:us-east-2:ecr') {
+ 
+                                        def customImage = docker.build("676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:${env.BUILD_ID}")
 
-                                def customImage = docker.build("676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:${env.BUILD_ID}")
-
-                                 /* Push the container to the custom Registry */
-                                customImage.push()
-                                                                                                                          }
+                                        /* Push the container to the custom Registry */
+                                        customImage.push()
+                                                                                                                                               }
                                        }
-                         }
+                              }
                       
                       }
 
-              }
+               }
 }
