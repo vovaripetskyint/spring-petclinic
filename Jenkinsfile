@@ -27,7 +27,7 @@ pipeline {
                                 sh 'docker tag myapp:latest 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_ver_${BUILD_NUMBER}'
                                   script{
                                 docker.withRegistry('https://676833452478.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:ecr') {
-    docker.image('676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp').push('java${BUILD_NUMBER}')
+                                        docker.image('676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp').push('java${BUILD_NUMBER}')
   }
                                   }
                                   } 
