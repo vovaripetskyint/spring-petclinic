@@ -24,7 +24,7 @@ pipeline {
                       {
                          steps{
                                  script{
-                    	        docker.withRegistry('https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp', 'ecr') {
+                    	        docker.withRegistry('https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp', 'ecr:us-east-2:ecr') {
 
                                 def customImage = docker.build("myapp:${env.BUILD_ID}")
 
