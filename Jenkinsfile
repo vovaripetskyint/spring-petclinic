@@ -17,7 +17,7 @@ pipeline {
                          steps{
                     		sh 'mvn package'
                                 sh "pwd"
-                                sh 'cp /var/lib/jenkins/workspace/${JOB_NAME}/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar ../'
+                                sh 'cp /var/lib/jenkins/workspace/${JOB_NAME}/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar ./'
                               }
                       }
                    stage('Build by docker')
