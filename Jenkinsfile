@@ -23,7 +23,7 @@ pipeline {
                    stage('Build by docker')
                       {
                     	  steps{
-                                  dir('src'){sh 'docker build -t myapp .'}
+                                  dir('test_docker'){sh 'docker build -t myapp .'}
 
                                 sh '$(aws ecr get-login --no-include-email --region us-east-2)' 
                                 sh 'docker tag myapp:latest 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java${BUILD_NUMBER}'  
