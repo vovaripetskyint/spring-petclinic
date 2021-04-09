@@ -23,11 +23,12 @@ pipeline {
                    stage('Build by docker')
                       {
                     	  steps{
-                                  sh 'docker build -t myapp .'
-
-                                sh '$(aws ecr get-login --no-include-email --region us-east-2)' 
-                                sh 'docker tag myapp:latest 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java${BUILD_NUMBER}'  
-                                sh 'docker push 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java${BUILD_NUMBER}'
+                                sh 'docker build -t myapp .'
+                                sh 'docker tag myapp:latest 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java${BUILD_NUMBER}'
+                                docker.withRegistry('https://676833452478.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:ecr') {
+    docker.image('676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp').push('java${BUILD_NUMBER}')
+  }
+                              
                                   } 
                       }
                        
