@@ -9,7 +9,7 @@ pipeline {
              	  stage('Clone repository')
                       {
                     	steps{
-                               git branch: 'all_tasks', url: 'https://github.com/VovaRipetsky/spring-petclinic/'
+                                checkout scm
                              }
                       }
                   stage('Build by maven') 
