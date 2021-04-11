@@ -2,7 +2,7 @@ pipeline {
     agent none    
     stages {
          stage('build') {            
-           agent {docker { image 'java:latest' }  }            
+           agent {docker { image 'spellker:latest' }  }            
             steps {
                 sh "pwd"
                 sh 'mvn --version'
