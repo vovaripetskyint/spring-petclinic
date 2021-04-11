@@ -10,6 +10,7 @@ pipeline {
                 stash(name: "artifact", includes: '**/target/*.jar')
              //   archiveArtifacts artifacts: '**/target/*.jar'
                   }
+            }
           
          stage('deploy') {
             agent {
