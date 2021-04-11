@@ -18,6 +18,9 @@ pipeline {
             steps {
                 unstash("artifact")
                 sh "pwd"
+                input(message: "Approve deployment based on branch ${BRANCH_NAME} to environment?"
+                sh "java -jar '**/target/*.jar'"
+                  )
             }
         }       
     }
