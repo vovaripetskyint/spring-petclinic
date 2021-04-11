@@ -1,7 +1,7 @@
 pipeline {
     agent none    
     stages {
-         stage('build') {            
+         stage('Build') {            
            agent {docker { image 'ubuntu_maven:latest' }  }            
             steps {
                 sh 'mvn package'
@@ -10,27 +10,34 @@ pipeline {
                   }
             }
           
-         stage('save artifact') {
+         stage('Save Artifact') {
             agent any                
-            steps {
-                
+            steps {                
                 dir('/home/ubuntu/jenkins_artifacts'){
-                unstash("artifact")
-                           
-                                                     }
-                
-                
+                unstash("artifact")    
                 input(message: "Approve deployment based on branch to environment?")
-                script 
+                    
+       // Not working but interesting aproach             
+       /*         script 
                 {
-                   docker.image('vova_java:latest').inside('-v /home/ubuntu/jenkins_artifacts/target:/home, -p 80:80'){}
+                   docker.image('java:latest').inside('-p 80:80'){}
                 }
-            //sh "java -jar /var/lib/jenkins/workspace/docker/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
-            //sh "java -jar /home/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
-                
-                  
+                sh "java -jar /var/lib/jenkins/workspace/docker/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
+       */
+                                 
             }
-        }       
+        }     
+             
+             
+        stage('Deployment') {            
+           agent { dockerfile true }            
+            steps {
+                sh 'pwd'
+               
+             //   archiveArtifacts artifacts: '**/target/*.jar'
+                  }
+            }     
+             
     }
         
         
