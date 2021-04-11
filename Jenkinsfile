@@ -8,7 +8,8 @@ pipeline {
                 sh "pwd"
                 sh 'mvn --version'
                // sh "git clone https://github.com/VovaRipetsky/spring-petclinic.git"
-                sh 'mvn -f /var/lib/jenkins/workspace/docker/spring-petclinic package'
+                sh 'mvn package'
+                //sh 'mvn -f /var/lib/jenkins/workspace/docker/spring-petclinic package'
                 archiveArtifacts artifacts: '*.jar'
                 
             
