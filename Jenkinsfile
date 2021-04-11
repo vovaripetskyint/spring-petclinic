@@ -14,7 +14,7 @@ pipeline {
           
          stage('deploy') {
             agent {
-                docker { image 'java:latest' }  }
+                docker { image 'java:latest' args '-p 80:80'}  }
             steps {
                 unstash("artifact")
                 sh "pwd"
