@@ -1,37 +1,20 @@
 pipeline {
-        agent any
-        tools
-             {
-       		  git 'Default'
-       		  maven 'Maven-3-6-1'
-             }
-              stages{
-             	  stage('Clone')
-                      {
-                    	steps{
-                               git branch: 'master', url: 'https://github.com/VovaRipetsky/spring-petclinic/'
-                             }
-                      }
-              	     stage('Build') 
-                      {
-                         steps{
-                    		sh 'mvn package'
-                              }
-                      }
-                      stage('Deploy'){
-                    	  steps{
-                      		rtUpload (    
-                    		serverId: 'jfrog',spec: '''{
-               			                        "files": [
-               	     		                           {
-                		                                "pattern": "*.jar",
-                   	                                	"target": "example-repo-local/"
-                             		                   }
-                             				         ]
-					 		  }
-                                                       '''
-                                        )
-                               }
-                                    }
-           }
+    agent {
+        docker { image 'spellker:latest' }
+    }
+    stages {
+        stage('build') {
+            steps {
+                sh "pwd"
+                sh 'mvn --version'
+               // sh "git clone https://github.com/VovaRipetsky/spring-petclinic.git"
+                sh 'mvn -f /var/lib/jenkins/workspace/docker/spring-petclinic package'
+                archiveArtifacts artifacts: '*.jar'
+                
+            
+                }
+               
+        }
+    }
 }
+
