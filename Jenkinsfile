@@ -19,7 +19,7 @@ pipeline {
                 unstash("artifact")
                 sh "pwd"
                 input(message: "Approve deployment based on branch to environment?")
-                sh "java -jar spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
+                sh "java -jar /var/lib/jenkins/workspace/docker/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
                   
             }
         }       
