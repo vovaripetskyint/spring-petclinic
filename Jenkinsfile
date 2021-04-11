@@ -20,7 +20,7 @@ pipeline {
                 input(message: "Approve deployment based on branch to environment?")
                 script 
                 {
-                   docker.image('java:latset').inside('-p 80:80'){}
+                   docker.image('java:latest').inside('-p 80:80'){}
                 }
             sh "java -jar /var/lib/jenkins/workspace/docker/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
                 
