@@ -2,7 +2,7 @@ pipeline {
     agent none    
     stages {
          stage('build') {            
-           agent {docker { image 'maven:latest' }  }            
+           agent {docker { image 'ubuntu_maven:latest' }  }            
             steps {
                 sh 'mvn package'
                 stash(name: "artifact", includes: '**/target/*.jar')
