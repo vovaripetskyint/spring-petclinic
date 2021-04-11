@@ -16,7 +16,6 @@ pipeline {
             agent {
                 docker { image 'java:latest' }  }
             steps {
-                sh 'java -v'
                 unstash("artifact")
                 sh "pwd"
             }
