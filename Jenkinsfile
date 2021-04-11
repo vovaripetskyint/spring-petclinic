@@ -13,13 +13,17 @@ pipeline {
             }
           
          stage('deploy') {
-            agent {
-                docker { image 'java:latest' args '-p 80:80'}  }
+            agent any                
             steps {
                 unstash("artifact")
                 sh "pwd"
                 input(message: "Approve deployment based on branch to environment?")
-                sh "java -jar /var/lib/jenkins/workspace/docker/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
+                script 
+                {
+                   docker.image('java:latset').inside('-p 80:80'){}
+                }
+            sh "java -jar /var/lib/jenkins/workspace/docker/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
+                
                   
             }
         }       
