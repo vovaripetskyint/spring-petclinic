@@ -2,7 +2,7 @@ pipeline {
     agent none    
     stages {
          stage('build') {            
-           agent {docker { image 'ubuntu_maven:latest' }  }            
+           agent {docker { image 'maven:latest' }  }            
             steps {
                 sh 'mvn package'
                 stash(name: "artifact", includes: '**/target/*.jar')
@@ -26,7 +26,7 @@ pipeline {
                    docker.image('ubuntu_java:latest').inside('-v /home/ubuntu/jenkins_artifacts/target:/home, -p 80:80'){}
                 }
             //sh "java -jar /var/lib/jenkins/workspace/docker/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
-            sh "java -jar /home/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
+            //sh "java -jar /home/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80"
                 
                   
             }
