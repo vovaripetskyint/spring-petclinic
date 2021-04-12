@@ -30,13 +30,8 @@ pipeline {
              
              
         stage('Start container with new java image') {            
-            agent dockerfile {
-            
-            filename 'Dockerfile'
-          //  dir 'build'
-          //  label 'my-defined-label'
-            additionalBuildArgs  '--build-arg version=1.0.2'}           
-            steps {
+            agent { dockerfile {additionalBuildArgs  '--build-arg version=1.0.2'} }
+             steps {
                 sh 'java -jar /var/lib/jenkins/workspace/docker/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80'
                
                
