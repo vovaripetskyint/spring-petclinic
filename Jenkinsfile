@@ -30,7 +30,7 @@ pipeline {
              
              
         stage('Start container with new java image') {            
-            agent dockerfile {args '-p 80:80' }            
+            agent {dockerfile {args '-p 80:80' } }           
             steps {
                 sh 'java -jar /var/lib/jenkins/workspace/docker/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80'
                
