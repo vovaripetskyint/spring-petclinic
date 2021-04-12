@@ -30,12 +30,8 @@ pipeline {
              
              
         stage('Deployment') {            
-           agent { dockerfile true }            
-            steps {
-                sh 'java -jar /var/lib/jenkins/workspace/docker/target/spring-petclinic-2.2.0.BUILD-SNAPSHOT-master.jar --server.port=80'
-               
-             //   archiveArtifacts artifacts: '**/target/*.jar'
-                  }
+            agent { dockerfile { additionalBuildArgs  '--build-arg version=1.0.2' } }            
+            
             }     
              
     }
