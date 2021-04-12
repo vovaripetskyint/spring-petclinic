@@ -29,10 +29,11 @@ pipeline {
         }     
              
              
-        stage('Deployment') {            
+        stage('Building new Docker Image from new jar') {            
             agent { dockerfile true }            
             steps{
                 sh "pwd"
+                //looks like it is building but failing a gob because trying to run conteiner don't know for what
             }
             }     
              
