@@ -31,7 +31,9 @@ pipeline {
              
         stage('Deployment') {            
             agent { dockerfile { additionalBuildArgs  '--build-arg version=1.0.2' } }            
-            steps{}
+            steps{
+                sh "pwd"
+            }
             }     
              
     }
