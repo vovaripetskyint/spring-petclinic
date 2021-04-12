@@ -30,7 +30,7 @@ pipeline {
              
              
         stage('Deployment') {            
-            agent { dockerfile { label  '--version=1.0.2' } }            
+            agent { dockerfile true }            
             steps{
                 sh "pwd"
             }
