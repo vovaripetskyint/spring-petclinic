@@ -18,6 +18,14 @@ pipeline {
     DEFAULT_PROD_BRANCH  = "none"
   }
   stages {
+    
+    stage('Clone repository')
+                      {
+                    	steps{
+                                checkout scm
+                             }
+                      }
+    
     stage('Build') {
       steps {
         container('builder') {
