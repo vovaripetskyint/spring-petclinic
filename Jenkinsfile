@@ -3,7 +3,27 @@ pipeline {
   agent {
     kubernetes {
       defaultContainer 'git'
-      yamlFile 'jenkins-pod.yaml'
+      yaml """\
+       apiVersion: v1
+       kind: Pod
+       metadata:
+       spec:
+         serviceAccountName: jenkins
+         securityContext:
+           runAsUser: 0
+           fsGroup: 0
+       volumes:
+       - name: docker-sock
+         hostPath:
+           path: /var/run/docker.sock
+           type: Socket
+       containers:
+       - name: git
+         image: alpine/git:latest
+         command:
+         - cat
+         tty: true
+         """.stripIndent()
     }
   }
   options {
