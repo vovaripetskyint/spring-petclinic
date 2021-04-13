@@ -41,9 +41,9 @@ pipeline {
       steps {
         container('docker-builder') {
          
-          ansiColor('xterm') {
+          
             sh "docker build -t some:latest ."
-          }
+          
          
         }
       }
