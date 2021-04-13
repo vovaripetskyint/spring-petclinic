@@ -2,7 +2,7 @@
 pipeline {
   agent {
     kubernetes {
-      defaultContainer 'git'
+      defaultContainer 'docker-builder'
       yaml """\
        apiVersion: v1
        kind: Pod
@@ -17,12 +17,14 @@ pipeline {
          hostPath:
            path: /var/run/docker.sock
            type: Socket
-       containers:
-       - name: git
-         image: alpine/git:latest
+       - name: docker-builder
+         image: 'docker:18-git'
          command:
          - cat
          tty: true
+         volumeMounts:
+         - name: docker-sock
+           mountPath: /run/docker.sock
          """.stripIndent()
     }
   }
@@ -48,7 +50,7 @@ pipeline {
     
     stage('Build') {
       steps {
-        container('builder') {
+        container('docker-builder') {
          
           ansiColor('xterm') {
             sh "docker build -t some:latest ."
