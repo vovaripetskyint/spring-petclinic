@@ -12,8 +12,7 @@ pipeline {
     disableConcurrentBuilds()
   }
   environment {
-    AWS_REGION    = "ap-southeast-2"
-       VERSION       = getVersion() 
+    AWS_REGION    = "us-east-2"
     DEFAULT_DEV_BRANCH   = "develop"
     DEFAULT_STAGE_BRANCH = "none"
     DEFAULT_PROD_BRANCH  = "none"
@@ -24,12 +23,11 @@ pipeline {
         container('builder') {
          
           ansiColor('xterm') {
-            sh """#!/bin/sh
-              set -xe
-              ./gradlew assemble
-            """
+            sh "docker build -t some:latest ."
           }
-          stash includes: "build/libs/FPLWeb.jar", name: 'artefact'
+         
         }
       }
     }
+  }
+}
