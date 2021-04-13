@@ -1,37 +1,35 @@
+#!/bin/groovy
 pipeline {
-        agent any
-        tools
-             {
-       		  git 'Default'
-       		  maven 'Maven-3-6-1'
-             }
-              stages{
-             	  stage('Clone')
-                      {
-                    	steps{
-                               git branch: 'master', url: 'https://github.com/VovaRipetsky/spring-petclinic/'
-                             }
-                      }
-              	     stage('Build') 
-                      {
-                         steps{
-                    		sh 'mvn package'
-                              }
-                      }
-                      stage('Deploy'){
-                    	  steps{
-                      		rtUpload (    
-                    		serverId: 'jfrog',spec: '''{
-               			                        "files": [
-               	     		                           {
-                		                                "pattern": "*.jar",
-                   	                                	"target": "example-repo-local/"
-                             		                   }
-                             				         ]
-					 		  }
-                                                       '''
-                                        )
-                               }
-                                    }
-           }
-}
+  agent {
+    kubernetes {
+      defaultContainer 'git'
+      yamlFile 'jenkins-pod.yaml'
+    }
+  }
+  options {
+    timeout(time: 3, unit: 'HOURS')
+    preserveStashes(buildCount: 20)
+    disableConcurrentBuilds()
+  }
+  environment {
+    AWS_REGION    = "ap-southeast-2"
+       VERSION       = getVersion() 
+    DEFAULT_DEV_BRANCH   = "develop"
+    DEFAULT_STAGE_BRANCH = "none"
+    DEFAULT_PROD_BRANCH  = "none"
+  }
+  stages {
+    stage('Build') {
+      steps {
+        container('builder') {
+         
+          ansiColor('xterm') {
+            sh """#!/bin/sh
+              set -xe
+              ./gradlew assemble
+            """
+          }
+          stash includes: "build/libs/FPLWeb.jar", name: 'artefact'
+        }
+      }
+    }
