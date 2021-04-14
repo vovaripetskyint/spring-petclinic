@@ -1,37 +1,41 @@
-#!/bin/groovy
+// Uses Declarative syntax to run commands inside a container.
 pipeline {
-  agent {
-    kubernetes {
-      defaultContainer 'jnlp'
-      yaml '''
+    agent {
+        kubernetes {
+            // Rather than inline YAML, in a multibranch Pipeline you could use: yamlFile 'jenkins-pod.yaml'
+            // Or, to avoid YAML:
+            // containerTemplate {
+            //     name 'shell'
+            //     image 'ubuntu'
+            //     command 'sleep'
+            //     args 'infinity'
+            // }
+            yaml '''
 apiVersion: v1
 kind: Pod
 spec:
-  containers
+  containers:
   - name: docker-builder
-    image: 'docker:18-git'
+    image: docker18-git
     command:
-    - cat
-    tty: true
-         
+    - sleep
+    args:
+    - infinity
 '''
-    }
-  }
- 
-  stages {
-       
-    stage('Build') {
-      steps {
-        container('docker-builder') {
-         
-          
-            sh "whoami"
-            sh "pwd"
-            sh "ls -al"
-          
-         
+            // Can also wrap individual steps:
+            // container('shell') {
+            //     sh 'hostname'
+            // }
+            defaultContainer 'jnlp'
         }
-      }
     }
-  }
+    stages {
+        stage('Main') {
+            steps {
+              container('docker-builder') {
+                sh 'hostname'
+            }
+        }
+    }
+}
 }
