@@ -42,7 +42,9 @@ pipeline {
         container('jnlp') {
          
           
-            sh "docker build -t some:latest ."
+            sh "whoami"
+            sh "pwd"
+            sh "ls-al"
           
          
         }
