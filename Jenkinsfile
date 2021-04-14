@@ -30,8 +30,12 @@ pipeline {
                   }
             }
         
-        stage('Build by docker & push')
-                      {
+        stage('Build by docker & push')                      {
+            agent {
+               docker {
+                   image 'docker:latest' 
+                 //  args '-v /home/ubuntu/.m2:/root/.m2'
+               }    
                          steps{
                               script{
                              //        currentBuild.displayName = getDisplayName(VERSION)
