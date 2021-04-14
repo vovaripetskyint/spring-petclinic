@@ -16,7 +16,7 @@ kind: Pod
 spec:
   containers:
   - name: docker-builder
-    image: docker18-git
+    image: docker:latest
     command:
     - sleep
     args:
