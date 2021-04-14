@@ -2,7 +2,7 @@
 pipeline {
   agent {
     kubernetes {
-      defaultContainer 'docker-builder'
+      defaultContainer 'jnlp'
       yaml """\
        apiVersion: v1
        kind: Pod
