@@ -1,5 +1,20 @@
 pipeline {
     agent none    
+    
+    
+    options {
+    timeout(time: 3, unit: 'HOURS')
+    preserveStashes(buildCount: 1)
+    disableConcurrentBuilds()
+  }
+  environment {
+    AWS_REGION    = "us-east-2"
+    ECR_URL       = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
+    VERSION       = getVersion() 
+    
+  }
+    
+    
     stages {
          stage('Build') {            
            agent {
@@ -14,6 +29,30 @@ pipeline {
              //   archiveArtifacts artifacts: '**/target/*.jar'
                   }
             }
+        
+        stage('Build by docker & push')
+                      {
+                         steps{
+                              script{
+                                     currentBuild.displayName = getDisplayName(VERSION)
+                                     unstash 'artefact'
+                                  docker.withRegistry('${ECR_URL}', 'ecr:${VERSION}:ecr') 
+                                     {
+                                     def customImage = docker.build("${ECR_URL}:java_v_${env.BUILD_ID}")
+                                     /* Push the container to the custom Registry */
+                                     customImage.push()
+                                     }
+                                    }
+                              }
+                      
+                      }
+
+               }
     }
     
+}
+def getVersion() {
+  shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+  commitCount = sh(returnStdout: true, script: 'git rev-list --count HEAD').trim()
+  return "${commitCount}-${shortCommit}"
 }
