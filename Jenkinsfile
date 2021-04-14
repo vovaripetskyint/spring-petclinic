@@ -11,7 +11,7 @@ pipeline {
     AWS_REGION    = "us-east-2"
     ECR_URL       =  "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
     IMAGE_TAG     = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_${env.BUILD_ID}"  
-   VERSION       = getVersion() 
+  // VERSION       = getVersion() 
     
   }
     
@@ -62,8 +62,8 @@ pipeline {
     
   
 }
-def getVersion() {
-  shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-  commitCount = sh(returnStdout: true, script: 'git rev-list --count HEAD').trim()
-  return "${commitCount}-${shortCommit}"
-}
+//def getVersion() {
+//  shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+//  commitCount = sh(returnStdout: true, script: 'git rev-list --count HEAD').trim()
+//  return "${commitCount}-${shortCommit}"
+//}
