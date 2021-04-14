@@ -45,7 +45,7 @@ pipeline {
                                   //   docker.withRegistry('${ECR_URL}', 'ecr_key') 
                                      withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp") 
                                      {
-                                     def customImage = docker.build(${IMAGE_TAG})
+                                     def customImage = docker.build("676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_${env.BUILD_ID}")
                                      /* Push the container to the custom Registry */
                                      customImage.push()
                                      }
