@@ -36,6 +36,7 @@ pipeline {
                    image 'docker:latest' 
                  //  args '-v /home/ubuntu/.m2:/root/.m2'
                }    
+            }
                          steps{
                               script{
                              //        currentBuild.displayName = getDisplayName(VERSION)
@@ -54,7 +55,7 @@ pipeline {
                }
     
     
-  }
+  
 }
 //def getVersion() {
 //  shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
