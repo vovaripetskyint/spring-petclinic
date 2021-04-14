@@ -39,7 +39,7 @@ pipeline {
     
     stage('Build') {
       steps {
-        container('docker-builder') {
+        container('jnlp') {
          
           
             sh "docker build -t some:latest ."
