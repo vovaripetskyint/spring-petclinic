@@ -41,6 +41,7 @@ pipeline {
                          steps{
                               script{
                              //        currentBuild.displayName = getDisplayName(VERSION)
+                                     sh "whoami"
                                      unstash 'artifact'
                                   //   docker.withRegistry('${ECR_URL}', 'ecr_key') 
                                      withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp") 
