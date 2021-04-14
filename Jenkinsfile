@@ -9,7 +9,7 @@ pipeline {
   }
   environment {
     AWS_REGION    = "us-east-2"
-    ECR_URL       = "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
+    ECR_URL       =  "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
     IMAGE_TAG     = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_${env.BUILD_ID}"  
 //   VERSION       = getVersion() 
     
@@ -48,7 +48,7 @@ pipeline {
                                      {
                                      // need sudo chmod 666 /var/run/docker.sock from host
 
-                                     def customImage = docker.build("${env.IMAGE_TAG}:java_v_${env.BUILD_ID}")
+                                     def customImage = docker.build("${env.IMAGE_TAG}")
                                      /* Push the container to the custom Registry */
                                      customImage.push()
                                      }
