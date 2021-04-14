@@ -34,6 +34,7 @@ pipeline {
             steps{
                 sh "pwd"
                 //looks like it is building but failing a gob because trying to run conteiner don't know for what
+                //need to try --entrypoint=''
             }
             }     
              
