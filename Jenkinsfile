@@ -33,7 +33,7 @@ spec:
         stage('Main') {
             steps {
               container('docker-builder') {
-                sh 'hostname'
+                sh 'docker build -t ihaa .'
             }
         }
     }
