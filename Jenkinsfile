@@ -10,7 +10,7 @@ pipeline {
   environment {
     AWS_REGION    = "us-east-2"
     ECR_URL       = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
-    VERSION       = getVersion() 
+//   VERSION       = getVersion() 
     
   }
     
@@ -35,7 +35,7 @@ pipeline {
                          steps{
                               script{
                                      currentBuild.displayName = getDisplayName(VERSION)
-                                     unstash 'artefact'
+                                     unstash 'artifact'
                                      docker.withRegistry('${ECR_URL}', 'ecr:${AWS_REGION}:ecr_key') 
                                      {
                                      def customImage = docker.build("${ECR_URL}:java_v_${env.BUILD_ID}")
@@ -51,8 +51,8 @@ pipeline {
     
     
 }
-def getVersion() {
-  shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-  commitCount = sh(returnStdout: true, script: 'git rev-list --count HEAD').trim()
-  return "${commitCount}-${shortCommit}"
-}
+//def getVersion() {
+//  shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+//  commitCount = sh(returnStdout: true, script: 'git rev-list --count HEAD').trim()
+//  return "${commitCount}-${shortCommit}"
+//}
