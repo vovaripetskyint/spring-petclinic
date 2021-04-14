@@ -26,7 +26,7 @@ pipeline {
            }            
             steps {
                 sh 'mvn package'
-                stash(name: "artifact", includes: '**/target/*.jar')
+              //  stash(name: "artifact", includes: '**/target/*.jar')
              //   archiveArtifacts artifacts: '**/target/*.jar'
                   }
             }
@@ -42,7 +42,7 @@ pipeline {
                               script{
                              //        currentBuild.displayName = getDisplayName(VERSION)
                                     
-                                     unstash 'artifact'
+                      //               unstash 'artifact'
                                   //   docker.withRegistry('${ECR_URL}', 'ecr_key') 
                                   withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: "${env.ECR_URL}") 
                                      {
