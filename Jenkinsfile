@@ -9,7 +9,7 @@ pipeline {
   }
   environment {
     AWS_REGION    = "us-east-2"
-    ECR_URL       = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
+    ECR_URL       = "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
 //   VERSION       = getVersion() 
     
   }
@@ -42,7 +42,7 @@ pipeline {
                              //        currentBuild.displayName = getDisplayName(VERSION)
                                      unstash 'artifact'
                                   //   docker.withRegistry('${ECR_URL}', 'ecr_key') 
-                                    withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: '676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp') 
+                                    withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: 'https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp') 
                                      {
                                      def customImage = docker.build("${ECR_URL}:java_v_${env.BUILD_ID}")
                                      /* Push the container to the custom Registry */
