@@ -10,7 +10,7 @@ pipeline {
   environment {
     AWS_REGION    = "us-east-2"
     ECR_URL       = "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
-    IMAGE_TAG     = "${ECR_URL}:java_v_${env.BUILD_ID}"  
+    IMAGE_TAG     = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_${env.BUILD_ID}"  
 //   VERSION       = getVersion() 
     
   }
