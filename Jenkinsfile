@@ -35,7 +35,7 @@ pipeline {
             agent {
                docker {
                    image 'docker:latest' 
-                 //  args '-v /home/ubuntu/.m2:/root/.m2'
+                   args '-v /var/run/docker.sock:/var/run/docker.sock'
                }    
             }
                          steps{
