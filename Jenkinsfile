@@ -44,7 +44,7 @@ pipeline {
           
             sh "whoami"
             sh "pwd"
-            sh "ls-al"
+            sh "ls -al"
           
          
         }
