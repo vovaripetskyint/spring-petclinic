@@ -3,7 +3,7 @@ pipeline {
   agent {
     kubernetes {
       defaultContainer 'jnlp'
-      yaml """\
+      yaml '''
 apiVersion: v1
 kind: Pod
 spec:
@@ -14,7 +14,7 @@ spec:
     - cat
     tty: true
          
-         """.stripIndent()
+'''
     }
   }
  
