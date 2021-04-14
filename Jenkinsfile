@@ -17,7 +17,7 @@ pipeline {
     
     
     stages {
-         stage('Build') {            
+         stage('Build JAR file by Maven') {            
            agent {
                docker {
                    image 'maven:3.6.0-jdk-8-alpine' 
@@ -31,7 +31,7 @@ pipeline {
                   }
             }
         
-        stage('Build by docker & push')                      {
+        stage('Build Docker Image & Push to ECR')                      {
             agent {
                docker {
                    image 'docker:latest' 
