@@ -12,11 +12,14 @@ pipeline {
          securityContext:
            runAsUser: 0
            fsGroup: 0
+       
        volumes:
        - name: docker-sock
          hostPath:
            path: /var/run/docker.sock
            type: Socket
+           
+       containers:
        - name: docker-builder
          image: 'docker:18-git'
          command:
@@ -39,7 +42,7 @@ pipeline {
     
     stage('Build') {
       steps {
-        container('jnlp') {
+        container('docker-builder') {
          
           
             sh "whoami"
