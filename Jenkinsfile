@@ -54,6 +54,7 @@ pipeline {
                }
     
     
+  }
 }
 //def getVersion() {
 //  shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
