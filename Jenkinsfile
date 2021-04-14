@@ -44,7 +44,7 @@ pipeline {
                                     
                                      unstash 'artifact'
                                   //   docker.withRegistry('${ECR_URL}', 'ecr_key') 
-                                  withDockerRegistry(credentialsId: 'ecr:${env.AWS_REGION}:ecr_key', url: "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp") 
+                                  withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp") 
                                      {
                                      // need sudo chmod 666 /var/run/docker.sock from host
 
