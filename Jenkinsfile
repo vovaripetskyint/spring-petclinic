@@ -43,7 +43,7 @@ pipeline {
                              //        currentBuild.displayName = getDisplayName(VERSION)
                                      unstash 'artifact'
                                   //   docker.withRegistry('${ECR_URL}', 'ecr_key') 
-                                     withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: ${ECR_URL}) 
+                                     withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp") 
                                      {
                                      def customImage = docker.build("${IMAGE_TAG}")
                                      /* Push the container to the custom Registry */
