@@ -34,7 +34,7 @@ pipeline {
                       {
                          steps{
                               script{
-                                     currentBuild.displayName = getDisplayName(VERSION)
+                             //        currentBuild.displayName = getDisplayName(VERSION)
                                      unstash 'artifact'
                                      docker.withRegistry('${ECR_URL}', 'ecr:${AWS_REGION}:ecr_key') 
                                      {
