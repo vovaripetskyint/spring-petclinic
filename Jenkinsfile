@@ -14,7 +14,7 @@ pipeline {
 apiVersion: v1
 kind: Pod
 spec:
-volumes:
+  volumes:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
