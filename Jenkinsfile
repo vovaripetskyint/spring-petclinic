@@ -41,7 +41,7 @@ pipeline {
                               script{
                              //        currentBuild.displayName = getDisplayName(VERSION)
                                      unstash 'artifact'
-                                     docker.withRegistry('${ECR_URL}', 'ecr:${AWS_REGION}:ecr_key') 
+                                     docker.withRegistry('${ECR_URL}', 'ecr_key') 
                                      {
                                      def customImage = docker.build("${ECR_URL}:java_v_${env.BUILD_ID}")
                                      /* Push the container to the custom Registry */
