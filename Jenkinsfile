@@ -26,6 +26,9 @@ spec:
     - sleep
     args:
     - infinity
+    volumeMounts:
+    - name: docker-sock
+      mountPath: /run/docker.sock
 '''
             // Can also wrap individual steps:
             // container('shell') {
