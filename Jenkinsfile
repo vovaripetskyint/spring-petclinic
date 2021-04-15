@@ -2,7 +2,7 @@
 pipeline {
     agent {
         kubernetes {
-            yamlFile 'jenkins_pod.yaml'
+            
              yaml '''
 apiVersion: v1
 kind: Pod
