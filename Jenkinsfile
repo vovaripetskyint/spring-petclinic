@@ -6,19 +6,40 @@ pipeline {
              yaml '''
 apiVersion: v1
 kind: Pod
+metadata:
 spec:
+  serviceAccountName: jenkins
+  securityContext:
+    runAsUser: 0
+    fsGroup: 0
   volumes:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
         type: Socket
   containers:
-  - name: docker-builder
-    image: docker:latest
+  - name: helm
+    image: alpine/helm:3.5.2
     command:
-    - sleep
-    args:
-    - infinity
+    - cat
+    tty: true
+  - name: maven
+    image: maven:3.6.0-jdk-8-alpine
+    command:
+    - cat
+    tty: true
+    resources:
+      limits:
+        cpu: 1500m
+        memory: 1536Mi
+      requests:
+        cpu: 1000m
+        memory: 1024Mi
+  - name: docker-builder
+    image: 'docker:latest'
+    command:
+    - cat
+    tty: true
     volumeMounts:
     - name: docker-sock
       mountPath: /run/docker.sock
