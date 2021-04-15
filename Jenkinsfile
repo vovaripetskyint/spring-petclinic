@@ -47,6 +47,7 @@ pipeline {
                                   withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: "${env.ECR_URL}") 
                                      {
                                      // need sudo chmod 666 /var/run/docker.sock from host
+                                     // and also iam role is needed to be assighned on ec2
 
                                      def customImage = docker.build("${env.IMAGE_TAG}")
                                      /* Push the container to the custom Registry */
