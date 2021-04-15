@@ -21,7 +21,7 @@ pipeline {
            agent {
                docker {
                    image 'maven:3.6.0-jdk-8-alpine' 
-                 //  args '-v mvn_volume:/root/.m2'
+                   args '-v /root/.m2:/root/.m2'
                }  
            }            
             steps {
@@ -58,7 +58,7 @@ pipeline {
                       }
         
           stage('Run Container with built image') {            
-           
+              agent any
                steps {
                    sh "docker run -d -p 80:80 ${env.IMAGE_TAG}"
                      }
