@@ -6,13 +6,47 @@ pipeline {
             defaultContainer 'jnlp'
         }
     }
+    
+    options {
+    timeout(time: 3, unit: 'HOURS')
+    preserveStashes(buildCount: 1)
+    disableConcurrentBuilds()
+  }
+    environment {
+    AWS_REGION    = "us-east-2"
+    ECR_URL       =  "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
+    IMAGE_TAG     = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_${env.BUILD_ID}"  
+  // VERSION       = getVersion() 
+    
+  }
+    
+    
     stages {
-        stage('Main') {
+        
+        stage('Build JAR file by Maven') {
             steps {
-              container('docker-builder') {
-                sh 'docker build -t ihaa .'
+                container('maven') {
+                sh 'mvn package'
+                //  stash(name: "artifact", includes: '**/target/*.jar')
             }
         }
     }
+        
+        
+        stage('Build Docker Image & Push to ECR') {
+            steps {
+                container('docker-builder') {
+                    script{
+                        withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: "${env.ECR_URL}") {
+                             def customImage = docker.build("${env.IMAGE_TAG}")
+                             customImage.push()
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        
 }
 }
