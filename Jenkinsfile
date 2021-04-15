@@ -60,7 +60,7 @@ pipeline {
           stage('Run Container with built image') {            
            
                steps {
-                     sh 'docker -d -p 80:80 ${env.IMAGE_TAG}'
+                     sh "docker -d -p 80:80 ${env.IMAGE_TAG}"
                      }
                                                   }
 
