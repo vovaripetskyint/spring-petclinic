@@ -3,7 +3,26 @@ pipeline {
     agent {
         kubernetes {
             yamlFile 'jenkins_pod.yaml'
-            defaultContainer 'jnlp'
+             yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  volumes:
+    - name: docker-sock
+      hostPath:
+        path: /var/run/docker.sock
+        type: Socket
+  containers:
+  - name: docker-builder
+    image: docker:latest
+    command:
+    - sleep
+    args:
+    - infinity
+    volumeMounts:
+    - name: docker-sock
+      mountPath: /run/docker.sock
+'''
         }
     }
     
