@@ -25,7 +25,7 @@ pipeline {
                }  
            }            
             steps {
-              //  sh 'mvn package'
+                sh 'pwd'
               //  stash(name: "artifact", includes: '**/target/*.jar')
              //   archiveArtifacts artifacts: '**/target/*.jar'
                   }
