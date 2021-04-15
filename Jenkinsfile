@@ -1,5 +1,5 @@
 pipeline {
-    agent none    
+    agent any    
     
     
     options {
@@ -58,20 +58,13 @@ pipeline {
                       }
         
           stage('Run Container with built image') {            
-                agent {
-                   docker {
-                       image "${env.IMAGE_TAG}"
-                       args '-d, -p 80:80'
-               }  
-           }            
-            steps {
-                sh 'pwd'
-              //  stash(name: "artifact", includes: '**/target/*.jar')
-             //   archiveArtifacts artifacts: '**/target/*.jar'
-                  }
-            }
+           
+               steps {
+                     sh 'docker -d -p 80:80 ${env.IMAGE_TAG}'
+                     }
+                                                  }
 
-               }
+          }
     
     
   
