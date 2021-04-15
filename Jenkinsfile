@@ -21,7 +21,7 @@ pipeline {
            agent {
                docker {
                    image 'maven:3.6.0-jdk-8-alpine' 
-                   args '-v mvn_volume:/root/.m2'
+                 //  args '-v mvn_volume:/root/.m2'
                }  
            }            
             steps {
