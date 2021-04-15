@@ -60,7 +60,7 @@ pipeline {
           stage('Run Container with built image') {            
            
                steps {
-                     sh "docker -d -p 80:80 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_4}"
+                     sh "docker -d -p 80:80 676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_4"
                      }
                                                   }
 
