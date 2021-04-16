@@ -93,7 +93,7 @@ spec:
         stage('Deploy Application With New Image to EKS') {
             steps {
                 container('helm') {
-                
+                withCredentials(credentialsId: "ecr:us-east-2:ecr_key") {
                  sh """#!/bin/sh
               set -xe
 
