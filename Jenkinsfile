@@ -93,7 +93,7 @@ spec:
         stage('Deploy Application With New Image to EKS') {
             steps {
                 container('helm') {
-                withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key') {
+               
                  sh """#!/bin/sh
               set -xe
 
@@ -118,6 +118,6 @@ spec:
             }
         }
     }
-        }     
+             
 }
 }
