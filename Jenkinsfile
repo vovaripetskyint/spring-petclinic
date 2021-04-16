@@ -57,7 +57,7 @@ spec:
     ECR_URL           = "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
     IMAGE_TAG         = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_${env.BUILD_ID}"  
     S3_REPOSITORY_URL = "s3://myvovastartup/Helm"    
-    HELM_CHART_NAME   = "myrepo/app-helm-chart" 
+    HELM_CHART_NAME   = "myrepo/application" 
     HELM_HOME         = "/data/helm"
   // VERSION       = getVersion() 
     
