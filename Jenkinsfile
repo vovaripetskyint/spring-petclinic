@@ -53,9 +53,11 @@ spec:
     disableConcurrentBuilds()
   }
     environment {
-    AWS_REGION    = "us-east-2"
-    ECR_URL       =  "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
-    IMAGE_TAG     = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_${env.BUILD_ID}"  
+    AWS_REGION        = "us-east-2"
+    ECR_URL           = "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
+    IMAGE_TAG         = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_${env.BUILD_ID}"  
+    S3_REPOSITORY_URL = "s3://myvovastartup/Helm"    
+    HELM_CHART_NAME   = "myrepo/app-helm-chart"    
   // VERSION       = getVersion() 
     
   }
@@ -82,11 +84,25 @@ spec:
                              customImage.push()
                         }
                     }
+                  input(message: "Approve deployment based on branch to environment?")
                 }
             }
         }
         
-        
+        stage('Deploy Application With New Image to EKS') {
+            steps {
+                container('helm') {
+                sh '''
+                helm repo add myrepo $S3_REPOSITORY_URL
+                helm repo list 
+                helm install prod_app $HELM_CHART_NAME 
+                helm upgrade prod_app $HELM_CHART_NAME  --set container.image=$IMAGE_TAG
+              '''  
+                
+                //  stash(name: "artifact", includes: '**/target/*.jar')
+            }
+        }
+    }
         
 }
 }
