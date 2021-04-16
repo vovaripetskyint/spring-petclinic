@@ -93,7 +93,7 @@ spec:
             steps {
                 container('helm') {
                 sh '''
-                apt install git -y
+                apk --update --no-cache add git 
                 helm plugin install https://github.com/hypnoglow/helm-s3.git --version 0.10.0
                 helm repo add myrepo $S3_REPOSITORY_URL
                 helm repo list 
