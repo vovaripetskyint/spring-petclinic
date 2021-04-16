@@ -110,8 +110,8 @@ spec:
                     
                 helm repo add myrepo $S3_REPOSITORY_URL
                 helm repo list 
-                helm install prod_app $HELM_CHART_NAME 
-                helm upgrade prod_app $HELM_CHART_NAME  --set container.image=$IMAGE_TAG
+                helm install prodapp $HELM_CHART_NAME 
+                helm upgrade prodapp $HELM_CHART_NAME  --set container.image=$IMAGE_TAG
               '''  
                 
                 //  stash(name: "artifact", includes: '**/target/*.jar')
