@@ -8,7 +8,7 @@ apiVersion: v1
 kind: Pod
 metadata:
 spec:
-  serviceAccountName: jenkins
+  serviceAccountName: myjenkins
   securityContext:
     runAsUser: 0
     fsGroup: 0
