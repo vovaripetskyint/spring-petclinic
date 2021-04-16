@@ -30,11 +30,11 @@ spec:
     tty: true
     resources:
       limits:
-        cpu: 1500m
-        memory: 1536Mi
+        cpu: 2500m
+        memory: 2536Mi
       requests:
-        cpu: 1000m
-        memory: 1024Mi
+        cpu: 2000m
+        memory: 2024Mi
   - name: docker-builder
     image: 'docker:latest'
     command:
@@ -93,6 +93,7 @@ spec:
             steps {
                 container('helm') {
                 sh '''
+                helm plugin install https://github.com/hypnoglow/helm-s3.git --version 0.10.0
                 helm repo add myrepo $S3_REPOSITORY_URL
                 helm repo list 
                 helm install prod_app $HELM_CHART_NAME 
