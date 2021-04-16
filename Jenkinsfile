@@ -30,11 +30,11 @@ spec:
     tty: true
     resources:
       limits:
-        cpu: 2500m
-        memory: 2536Mi
+        cpu: 1700m
+        memory: 3500Mi
       requests:
-        cpu: 2000m
-        memory: 2024Mi
+        cpu: 1000m
+        memory: 3024Mi
   - name: docker-builder
     image: 'docker:latest'
     command:
