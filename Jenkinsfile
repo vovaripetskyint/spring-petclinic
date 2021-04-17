@@ -31,10 +31,10 @@ spec:
     resources:
       limits:
         cpu: 1700m
-        memory: 3000Mi
+        memory: 1536Mi
       requests:
         cpu: 1000m
-        memory: 2048Mi
+        memory: 1024Mi
   - name: docker-builder
     image: 'docker:latest'
     command:
