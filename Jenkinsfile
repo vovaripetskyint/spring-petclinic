@@ -102,7 +102,7 @@ spec:
               mkdir -p $HELM_HOME/plugins \
                 && helm plugin install https://github.com/hypnoglow/helm-s3.git --version 0.10.0
             """    
-                    
+                try {    
                                                     
                 sh '''
                     
@@ -111,7 +111,9 @@ spec:
                 helm install prodapp $HELM_CHART_NAME 
                 helm upgrade prodapp $HELM_CHART_NAME  --set container.image=$IMAGE_TAG --set replicaCount=1
               '''  
-                
+                } catch (err) {
+                     echo "something failed"
+                            }
                 //  stash(name: "artifact", includes: '**/target/*.jar')
             }
         }
