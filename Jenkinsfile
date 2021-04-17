@@ -17,6 +17,9 @@ spec:
       hostPath:
         path: /var/run/docker.sock
         type: Socket
+    - name: pv-dynamic-storage
+      persistentVolumeClaim:
+        claimName: pvc-dynamic
   containers:
   - name: helm
     image: alpine/helm:3.5.2
@@ -36,6 +39,8 @@ spec:
         cpu: 1000m
         memory: 1024Mi
     volumeMounts:
+    - mountPath: "/root/.m2"
+      name: pv-dynamic-storage
   - name: docker-builder
     image: 'docker:latest'
     command:
