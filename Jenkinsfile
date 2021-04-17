@@ -85,7 +85,7 @@ spec:
                              customImage.push()
                         }
                     }
-                  input(message: "Approve deployment based on branch to environment?")
+             //     input(message: "Approve deployment based on branch to environment?")
                 }
             }
         }
