@@ -111,11 +111,12 @@ spec:
                 helm install prodapp $HELM_CHART_NAME 
                 helm upgrade prodapp $HELM_CHART_NAME  --set container.image=$IMAGE_TAG --set replicaCount=1
               '''  
-                } catch (err) {
-                     echo "something failed"
-                            }
+               
                 //  stash(name: "artifact", includes: '**/target/*.jar')
             }
+                 } catch (err) {
+                     echo "something failed"
+                            }
         }
     }
              
