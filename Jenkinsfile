@@ -89,7 +89,7 @@ spec:
                 }
             }
         }
-        try {
+       
         stage('Deploy Application With New Image to EKS') {
             steps {
                 container('helm') {
@@ -114,9 +114,7 @@ spec:
                
                 //  stash(name: "artifact", includes: '**/target/*.jar')
             }
-                 } catch (err) {
-                     echo "something failed"
-                            }
+               
         }
     }
              
