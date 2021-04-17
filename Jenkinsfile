@@ -89,7 +89,7 @@ spec:
                 }
             }
         }
-        
+        try {
         stage('Deploy Application With New Image to EKS') {
             steps {
                 container('helm') {
@@ -102,7 +102,7 @@ spec:
               mkdir -p $HELM_HOME/plugins \
                 && helm plugin install https://github.com/hypnoglow/helm-s3.git --version 0.10.0
             """    
-                try {    
+                    
                                                     
                 sh '''
                     
