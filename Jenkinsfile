@@ -39,7 +39,7 @@ spec:
         cpu: 1000m
         memory: 1024Mi
     volumeMounts:
-    - mountPath: "var/log"
+    - mountPath: "/root/.m2"
       name: pv-dynamic-storage
   - name: docker-builder
     image: 'docker:latest'
