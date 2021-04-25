@@ -81,7 +81,7 @@ spec:
         }
     }
         
-        
+     /*   
         
         stage('Build Docker Image & Push to ECR') {
             steps {
@@ -89,8 +89,7 @@ spec:
                    sh """#!/bin/sh
               set -xe
               apk update
-              uname -a
-              
+                      
               
              apk add --no-cache \
              python3 \
@@ -112,7 +111,7 @@ spec:
             }
         }
         
-        
+        */
         
         
    /**     
@@ -130,6 +129,29 @@ spec:
             }
         }
        */
+        
+        
+           
+        stage('Build Docker Image & Push to ECR') {
+            steps {
+                container('docker-builder') {
+                    script{
+                        docker.withRegistry('${env.ECR_URL}') {
+                             def customImage = docker.build("${env.IMAGE_TAG}")
+                             customImage.push()
+                        }
+                    }
+             //     input(message: "Approve deployment based on branch to environment?")
+                }
+            }
+        }
+         
+        
+        
+        
+        
+        
+        
         stage('Deploy Application With New Image to EKS') {
             steps {
                 container('helm') {
