@@ -136,7 +136,7 @@ spec:
             steps {
                 container('docker-builder') {
                     script{
-                        docker.withRegistry('${env.ECR_URL}') {
+                        docker.withRegistry('https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp') {
                              def customImage = docker.build("${env.IMAGE_TAG}")
                              customImage.push()
                         }
