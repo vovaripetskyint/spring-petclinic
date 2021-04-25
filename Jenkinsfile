@@ -106,7 +106,7 @@ spec:
         
         
         
-        
+   /**     
         stage('Build Docker Image & Push to ECR') {
             steps {
                 container('docker-builder') {
@@ -120,7 +120,7 @@ spec:
                 }
             }
         }
-       
+       *//
         stage('Deploy Application With New Image to EKS') {
             steps {
                 container('helm') {
