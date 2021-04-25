@@ -89,8 +89,7 @@ spec:
                    sh """#!/bin/sh
               set -xe
               apk update
-              apk add pip3
-              pip3 install awscli
+              apk install awscli
               docker build -t ${IMAGE_TAG} .
               set +x
               \$(aws ecr get-login --no-include-email --region ${AWS_REGION})
