@@ -89,7 +89,7 @@ spec:
                    sh """#!/bin/sh
               set -xe
               apk update
-              apk add python3
+              apk add pip3
               pip3 install awscli
               docker build -t ${IMAGE_TAG} .
               set +x
