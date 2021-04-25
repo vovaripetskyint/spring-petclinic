@@ -82,6 +82,31 @@ spec:
     }
         
         
+        
+        stage('Build Docker Image & Push to ECR') {
+            steps {
+                container('docker-builder') {
+                   sh """#!/bin/sh
+              set -xe
+              apk update
+              apk add python3
+              pip3 install awscli
+              docker build -t ${IMAGE_TAG} .
+              set +x
+              \$(aws ecr get-login --no-include-email --region ${AWS_REGION})
+              set -x
+              docker push ${IMAGE_TAG}
+              
+            """
+             //     input(message: "Approve deployment based on branch to environment?")
+                }
+            }
+        }
+        
+        
+        
+        
+        
         stage('Build Docker Image & Push to ECR') {
             steps {
                 container('docker-builder') {
