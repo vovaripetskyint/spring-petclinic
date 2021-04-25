@@ -90,7 +90,7 @@ spec:
               set -xe
               apk update
               uname -a
-              cat /etc/lsb-release
+              
               
              apk add --no-cache \
              python3 \
