@@ -81,7 +81,7 @@ spec:
         }
     }
         
-     /*   
+        
         
         stage('Build Docker Image & Push to ECR') {
             steps {
@@ -111,10 +111,10 @@ spec:
             }
         }
         
-        */
         
         
-   /**     
+   //ECR PLUGIN:     
+   /**   
         stage('Build Docker Image & Push to ECR') {
             steps {
                 container('docker-builder') {
@@ -130,26 +130,7 @@ spec:
         }
        */
         
-        
-           
-        stage('Build Docker Image & Push to ECR') {
-            steps {
-                container('docker-builder') {
-                    script{
-                        docker.withRegistry('https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp') {
-                             def customImage = docker.build("${env.IMAGE_TAG}")
-                             customImage.push()
-                        }
-                    }
-             //     input(message: "Approve deployment based on branch to environment?")
-                }
-            }
-        }
-         
-        
-        
-        
-        
+      
         
         
         stage('Deploy Application With New Image to EKS') {
