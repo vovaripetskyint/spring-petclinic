@@ -120,7 +120,7 @@ spec:
                 }
             }
         }
-       *//
+       */
         stage('Deploy Application With New Image to EKS') {
             steps {
                 container('helm') {
