@@ -89,7 +89,17 @@ spec:
                    sh """#!/bin/sh
               set -xe
               apk update
-              apk install awscli
+              uname -a
+              cat /etc/lsb-release
+              
+             apk add --no-cache \
+             python3 \
+             py3-pip \
+             && pip3 install --upgrade pip \
+             && pip3 install \
+             awscli \
+             && rm -rf /var/cache/apk/*
+              
               docker build -t ${IMAGE_TAG} .
               set +x
               \$(aws ecr get-login --no-include-email --region ${AWS_REGION})
