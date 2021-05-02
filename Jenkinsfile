@@ -75,7 +75,7 @@ spec:
         stage('Build JAR file by Maven') {
             steps {
                 container('maven') {
-                sh 'mvn package'
+                sh 'mvn -DskipTests=true package'
                 //  stash(name: "artifact", includes: '**/target/*.jar')
             }
         }
