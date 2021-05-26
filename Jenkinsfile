@@ -1,6 +1,8 @@
 // Uses Declarative syntax to run commands inside a container.
 pipeline {
     
+    agent none
+    
     
     options {
     timeout(time: 3, unit: 'HOURS')
