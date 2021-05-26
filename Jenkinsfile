@@ -93,7 +93,7 @@ pipeline {
             agent {
                   kubernetes {
                   defaultContainer 'jnlp'
-                  yamlFile 'jenkins-pod.yml'
+                  yamlFile 'jenkins_pod.yml'
                   slaveConnectTimeout 180
         }
       }
