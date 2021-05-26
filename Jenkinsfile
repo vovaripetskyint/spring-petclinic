@@ -1,7 +1,11 @@
 // Uses Declarative syntax to run commands inside a container.
 pipeline {
     
-    agent none
+    agent {
+      kubernetes {
+      yamlFile 'jenkins_pod.yml'
+    }
+  }
     
     
     options {
@@ -75,24 +79,7 @@ pipeline {
         }
         
         
-        
-   //ECR PLUGIN:     
-   /**   
-        stage('Build Docker Image & Push to ECR') {
-            steps {
-                container('docker-builder') {
-                    script{
-                        withDockerRegistry(credentialsId: 'ecr:us-east-2:ecr_key', url: "${env.ECR_URL}") {
-                             def customImage = docker.build("${env.IMAGE_TAG}")
-                             customImage.push()
-                        }
-                    }
-             //     input(message: "Approve deployment based on branch to environment?")
-                }
-            }
-        }
-       */
-        
+    
       
         
         
