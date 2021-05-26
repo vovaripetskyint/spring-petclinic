@@ -26,7 +26,6 @@ pipeline {
         stage('Build JAR file by Maven') {
             agent {
                   kubernetes {
-                  defaultContainer 'jnlp'
                   yamlFile 'jenkins_pod_fargate.yml'
                   slaveConnectTimeout 180
         }
@@ -44,7 +43,6 @@ pipeline {
         stage('Build Docker Image & Push to ECR') {
             agent {
                   kubernetes {
-                  defaultContainer 'jnlp'
                   yamlFile 'jenkins_pod.yml'
                   slaveConnectTimeout 180
         }
