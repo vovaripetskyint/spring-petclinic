@@ -8,11 +8,6 @@ spec:
   securityContext:
     runAsUser: 0
     fsGroup: 0
-  volumes:
-    - name: docker-sock
-      hostPath:
-        path: /var/run/docker.sock
-        type: Socket
    
   containers:
   - name: maven-fargate
@@ -33,6 +28,4 @@ spec:
     command:
     - cat
     tty: true
-    volumeMounts:
-    - name: docker-sock
-      mountPath: /run/docker.sock
+   
