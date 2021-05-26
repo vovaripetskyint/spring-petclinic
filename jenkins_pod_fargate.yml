@@ -23,8 +23,8 @@ spec:
         cpu: 1000m
         memory: 1024Mi
   
-  - name: docker-builder-fargate
-    image: 'docker:latest'
+ - name: helm
+    image: alpine/helm:3.5.2
     command:
     - cat
     tty: true
