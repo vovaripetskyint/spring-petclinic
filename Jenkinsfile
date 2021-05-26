@@ -45,12 +45,12 @@ pipeline {
             agent {
                   kubernetes {
                   defaultContainer 'jnlp'
-                  yamlFile 'jenkins_pod_fargate.yml'
+                  yamlFile 'jenkins_pod.yml'
                   slaveConnectTimeout 180
         }
       }
             steps {
-                container('docker-builder-fargate') {
+                container('docker-builder') {
                    sh """#!/bin/sh
               set -xe
               apk update
@@ -101,13 +101,12 @@ pipeline {
         stage('Deploy Application With New Image to EKS') {
             agent {
                   kubernetes {
-                  defaultContainer 'jnlp'
-                  yamlFile 'jenkins_pod.yml'
+                  yamlFile 'jenkins_pod_fargate.yml'
                   slaveConnectTimeout 180
         }
       }
             steps {
-                container('helm') {
+                container('helm-fargate') {
                
                  sh """#!/bin/sh
               set -xe
