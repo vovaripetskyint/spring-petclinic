@@ -9,7 +9,23 @@ spec:
   securityContext:
     runAsUser: 0
     fsGroup: 0   
+  volumes:
+    - name: docker-sock
+      hostPath:
+        path: /var/run/docker.sock
+        type: Socket
+    
+  
   containers:
+  - name: docker-builder
+    image: 'docker:latest'
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+    - name: docker-sock
+      mountPath: /run/docker.sock
+  
   - name: maven-fargate
     image: maven:3.6.0-jdk-8-alpine
     command:
@@ -20,10 +36,4 @@ spec:
     command:
     - cat
     tty: true  
-    resources:
-      limits:
-        cpu: 3900m
-        memory: 7936Mi
-      requests:
-        cpu: 3900m
-        memory: 7936Mi
+    
