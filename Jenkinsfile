@@ -82,7 +82,7 @@ pipeline {
         stage('Deploy Application With New Image to EKS') {
             
             steps {
-                container('helm-fargate') {
+                container('helm') {
                
                  sh """#!/bin/sh
               set -xe
