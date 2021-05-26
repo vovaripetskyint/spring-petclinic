@@ -20,3 +20,8 @@ spec:
     volumeMounts:
     - name: docker-sock
       mountPath: /run/docker.sock
+  - name: helm-fargate
+    image: alpine/helm:3.5.2
+    command:
+    - cat
+    tty: true  
