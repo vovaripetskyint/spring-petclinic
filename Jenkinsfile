@@ -1,7 +1,11 @@
 // Uses Declarative syntax to run commands inside a container.
 pipeline {
     
-    agent none
+    kubernetes {
+      defaultContainer 'git'
+      yamlFile 'jenkins_pod.yml'
+    }
+  }
     
     
     options {
@@ -42,12 +46,7 @@ pipeline {
         
         
         stage('Build Docker Image & Push to ECR') {
-            agent {
-                  kubernetes {
-                  yamlFile 'jenkins_pod.yml'
-                  slaveConnectTimeout 180
-        }
-      }
+            
             steps {
                 container('docker-builder') {
                    unstash 'artifact'
@@ -82,12 +81,7 @@ pipeline {
         
         
         stage('Deploy Application With New Image to EKS') {
-            agent {
-                  kubernetes {
-                  yamlFile 'jenkins_pod_fargate.yml'
-                  slaveConnectTimeout 180
-        }
-      }
+            
             steps {
                 container('helm-fargate') {
                
