@@ -1,13 +1,6 @@
 // Uses Declarative syntax to run commands inside a container.
 pipeline {
-    agent {
-        kubernetes {
-            yamlFile 'jenkins_pod_fargate.yml'
- //           yamlFile 'jenkins_pod.yml'
-
-
-        }
-    }
+    
     
     options {
     timeout(time: 3, unit: 'HOURS')
