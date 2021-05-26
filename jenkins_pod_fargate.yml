@@ -26,6 +26,13 @@ spec:
     tty: true
   - name: helm-fargate
     image: alpine/helm:3.5.2
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "2048Mi"
+        cpu: "1024m"
     command:
     - cat
     tty: true  
