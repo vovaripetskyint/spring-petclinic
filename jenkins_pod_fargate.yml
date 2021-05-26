@@ -19,7 +19,7 @@ spec:
         memory: "64Mi"
         cpu: "250m"
       limits:
-        memory: "2048i"
+        memory: "2048Mi"
         cpu: "1024m"
     command:
     - cat
