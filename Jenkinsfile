@@ -29,6 +29,13 @@ pipeline {
     stages {
         
         stage('Build JAR file by Maven') {
+            agent {
+                  kubernetes {
+                  defaultContainer 'jnlp'
+                  yamlFile 'jenkins_pod_fargate.yml'
+                  slaveConnectTimeout 180
+        }
+      }
             steps {
                 container('maven-fargate') {
                 sh 'mvn -DskipTests=true package'
@@ -40,6 +47,13 @@ pipeline {
         
         
         stage('Build Docker Image & Push to ECR') {
+            agent {
+                  kubernetes {
+                  defaultContainer 'jnlp'
+                  yamlFile 'jenkins_pod_fargate.yml'
+                  slaveConnectTimeout 180
+        }
+      }
             steps {
                 container('docker-builder-fargate') {
                    sh """#!/bin/sh
