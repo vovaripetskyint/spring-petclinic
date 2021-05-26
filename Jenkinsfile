@@ -34,7 +34,7 @@ pipeline {
             steps {
                 container('maven-fargate') {
                 sh 'mvn -DskipTests=true package'
-                //  stash(name: "artifact", includes: '**/target/*.jar')
+                stash(name: "artifact", includes: '**/target/*.jar')
             }
         }
     }
@@ -50,6 +50,7 @@ pipeline {
       }
             steps {
                 container('docker-builder') {
+                   unstash 'artifact'
                    sh """#!/bin/sh
               set -xe
               apk update
