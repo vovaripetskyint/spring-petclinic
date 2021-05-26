@@ -16,8 +16,8 @@ spec:
     image: maven:3.6.0-jdk-8-alpine
     resources:
       requests:
-        memory: "64Mi"
-        cpu: "250m"
+        memory: "128Mi"
+        cpu: "512m"
       limits:
         memory: "2048Mi"
         cpu: "1024m"
