@@ -23,7 +23,7 @@ spec:
         cpu: 1000m
         memory: 1024Mi
   
- - name: helm
+ - name: helm-fargate
     image: alpine/helm:3.5.2
     command:
     - cat
