@@ -2,54 +2,10 @@
 pipeline {
     agent {
         kubernetes {
-            
-             yaml '''
-apiVersion: v1
-kind: Pod
-metadata:
-spec:
-  serviceAccountName: myjenkins
-  securityContext:
-    runAsUser: 0
-    fsGroup: 0
-  volumes:
-    - name: docker-sock
-      hostPath:
-        path: /var/run/docker.sock
-        type: Socket
-    - name: pv-dynamic-storage
-      persistentVolumeClaim:
-        claimName: pvc-dynamic
-  containers:
-  - name: helm
-    image: alpine/helm:3.5.2
-    command:
-    - cat
-    tty: true
-  - name: maven
-    image: maven:3.6.0-jdk-8-alpine
-    command:
-    - cat
-    tty: true
-    resources:
-      limits:
-        cpu: 1700m
-        memory: 1536Mi
-      requests:
-        cpu: 1000m
-        memory: 1024Mi
-    volumeMounts:
-    - mountPath: "/root/.m2"
-      name: pv-dynamic-storage
-  - name: docker-builder
-    image: 'docker:latest'
-    command:
-    - cat
-    tty: true
-    volumeMounts:
-    - name: docker-sock
-      mountPath: /run/docker.sock
-'''
+            yamlFile 'jenkins_pod_fargate.yaml'
+            yamlFile 'jenkins_pod.yaml'
+
+
         }
     }
     
@@ -74,7 +30,7 @@ spec:
         
         stage('Build JAR file by Maven') {
             steps {
-                container('maven') {
+                container('maven-fargate') {
                 sh 'mvn -DskipTests=true package'
                 //  stash(name: "artifact", includes: '**/target/*.jar')
             }
@@ -85,7 +41,7 @@ spec:
         
         stage('Build Docker Image & Push to ECR') {
             steps {
-                container('docker-builder') {
+                container('docker-builder-fargate') {
                    sh """#!/bin/sh
               set -xe
               apk update
