@@ -1,7 +1,7 @@
 // Uses Declarative syntax to run commands inside a container.
 pipeline {
-    
-    kubernetes {
+    agent {
+      kubernetes {
       defaultContainer 'git'
       yamlFile 'jenkins_pod.yml'
     }
