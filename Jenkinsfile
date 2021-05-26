@@ -30,6 +30,7 @@ pipeline {
         stage('Build JAR file by Maven') {
             agent {
                   kubernetes {
+                  defaultContainer 'jnlp'
                   yamlFile 'jenkins_pod_fargate.yml'
                   slaveConnectTimeout 180
         }
