@@ -90,6 +90,13 @@ pipeline {
         
         
         stage('Deploy Application With New Image to EKS') {
+            agent {
+                  kubernetes {
+                  defaultContainer 'jnlp'
+                  yamlFile 'jenkins-pod.yml'
+                  slaveConnectTimeout 180
+        }
+      }
             steps {
                 container('helm') {
                
