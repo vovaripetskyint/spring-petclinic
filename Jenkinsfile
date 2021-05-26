@@ -2,7 +2,6 @@
 pipeline {
     agent {
       kubernetes {
-      defaultContainer 'git'
       yamlFile 'jenkins_pod.yml'
     }
   }
