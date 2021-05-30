@@ -66,7 +66,9 @@ spec:
                 set -x
                 aws sts get-caller-identity
                 aws s3 ls
-                DBPASSWORD=aws ssm get-parameters --name /prod/mysq/db.password --region us-east-2 --with-decryption --output text --query Parameters[].Value
+                set -x
+                export DBPASSWORD=`aws ssm get-parameters --name /prod/mysq/db.password --region us-east-2 --with-decryption --output text --query Parameters[].Value`
+                set -x
                 echo $DBPASSWORD
               '''      
                
