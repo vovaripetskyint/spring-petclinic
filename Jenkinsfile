@@ -56,7 +56,7 @@ spec:
                  set +x   
                  aws sts assume-role-with-web-identity \
  --role-arn $AWS_ROLE_ARN \
- --role-session-name mh9test \
+ --role-session-name mysqlbackup \
  --web-identity-token file://$AWS_WEB_IDENTITY_TOKEN_FILE \
  --duration-seconds 1000 > /tmp/irp-cred.txt
  export AWS_ACCESS_KEY_ID="$(cat /tmp/irp-cred.txt | jq -r ".Credentials.AccessKeyId")"
