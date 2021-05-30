@@ -63,6 +63,7 @@ spec:
  export AWS_SECRET_ACCESS_KEY="$(cat /tmp/irp-cred.txt | jq -r ".Credentials.SecretAccessKey")"
  export AWS_SESSION_TOKEN="$(cat /tmp/irp-cred.txt | jq -r ".Credentials.SessionToken")"
  rm /tmp/irp-cred.txt
+                set +x
                 aws sts get-caller-identity
                 aws s3 ls
                 export DBPASSWORD=`aws ssm get-parameters --name /prod/mysq/db.password --region us-east-2 --with-decryption --output text --query Parameters[].Value`
