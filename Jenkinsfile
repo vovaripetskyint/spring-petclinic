@@ -69,7 +69,7 @@ spec:
  rm /tmp/irp-cred.txt
               '''      
                
-                sh 'aws s3 ls'    
+                sh 'aws sts get-caller-identity'    
             }
         }
     }
