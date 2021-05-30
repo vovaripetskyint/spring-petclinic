@@ -67,7 +67,7 @@ spec:
                 aws s3 ls
                 export DBPASSWORD=`aws ssm get-parameters --name /prod/mysql/db.password --region us-east-2 --with-decryption --output text --query Parameters[].Value`
                 mysqldump -u root -p petclinic -h mysql.default --password=$DBPASSWORD > backup-$(date +%F_%R).sql
-                aws s3 cp backup-$(date +%F_%R).sql s3://myvovastartup/
+                aws s3 cp backup-$(date +%F_%R).sql s3://myvovastartup/mysql
               '''      
                
                   
