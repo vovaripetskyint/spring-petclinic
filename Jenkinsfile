@@ -49,14 +49,10 @@ spec:
         stage('MySQL test') {
             steps {
                 container('mysql') {
-           //     sh 'apt update && apt install awscli -y'
-           //     sh 'aws sts get-caller-identity'  
+           
                 sh '''
                  apt update && apt install awscli curl -y
                  JQ=/usr/bin/jq && curl https://stedolan.github.io/jq/download/linux64/jq > $JQ && chmod +x $JQ
-                 
-              ''' 
-                sh '''
                  set +x   
                  aws sts assume-role-with-web-identity \
  --role-arn $AWS_ROLE_ARN \
@@ -67,11 +63,11 @@ spec:
  export AWS_SECRET_ACCESS_KEY="$(cat /tmp/irp-cred.txt | jq -r ".Credentials.SecretAccessKey")"
  export AWS_SESSION_TOKEN="$(cat /tmp/irp-cred.txt | jq -r ".Credentials.SessionToken")"
  rm /tmp/irp-cred.txt
- aws sts get-caller-identity
- aws s3 ls
+                aws sts get-caller-identity
+                aws s3 ls
               '''      
                
-                sh 'aws sts get-caller-identity'    
+                  
             }
         }
     }
