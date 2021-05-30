@@ -52,7 +52,7 @@ spec:
            //     sh 'apt update && apt install awscli -y'
            //     sh 'aws sts get-caller-identity'  
                 sh '''
-                    
+                 apt install curl -y   
                  JQ=/usr/bin/jq && curl https://stedolan.github.io/jq/download/linux64/jq > $JQ && chmod +x $JQ
                  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py
                  pip install awscli --upgrade
