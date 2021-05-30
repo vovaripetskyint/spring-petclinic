@@ -49,9 +49,27 @@ spec:
         stage('MySQL test') {
             steps {
                 container('mysql') {
-                sh 'apt update && apt install awscli -y'
-                sh 'aws sts get-caller-identity'    
-               // sh 'aws sts assume-role --role-arn=arn:aws:iam::676833452478:role/eksctl-vovas-super-cluster-2-addon-iamservic-Role1-BPNRBOIS2NS3 --role-session-name s3-access-example'
+           //     sh 'apt update && apt install awscli -y'
+           //     sh 'aws sts get-caller-identity'  
+                sh '''
+                    
+                 JQ=/usr/bin/jq && curl https://stedolan.github.io/jq/download/linux64/jq > $JQ && chmod +x $JQ
+                 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py
+                 pip install awscli --upgrade
+              ''' 
+                sh '''
+                    
+                 aws sts assume-role-with-web-identity \
+ --role-arn $AWS_ROLE_ARN \
+ --role-session-name mh9test \
+ --web-identity-token file://$AWS_WEB_IDENTITY_TOKEN_FILE \
+ --duration-seconds 1000 > /tmp/irp-cred.txt
+ export AWS_ACCESS_KEY_ID="$(cat /tmp/irp-cred.txt | jq -r ".Credentials.AccessKeyId")"
+ export AWS_SECRET_ACCESS_KEY="$(cat /tmp/irp-cred.txt | jq -r ".Credentials.SecretAccessKey")"
+ export AWS_SESSION_TOKEN="$(cat /tmp/irp-cred.txt | jq -r ".Credentials.SessionToken")"
+ rm /tmp/irp-cred.txt
+              '''      
+               
                 sh 'aws s3 ls'    
             }
         }
