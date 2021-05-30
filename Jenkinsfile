@@ -51,7 +51,7 @@ spec:
                 container('mysql') {
                 sh 'apt update && apt install awscli -y'
                 sh 'aws sts get-caller-identity'    
-           //     sh 'aws sts assume-role --role-arn=arn:aws:iam::676833452478:role/eksctl-vovas-super-cluster-2-addon-iamservic-Role1-BPNRBOIS2NS3 --role-session-name s3-access-example'
+                sh 'aws sts assume-role --role-arn=arn:aws:iam::676833452478:role/eksctl-vovas-super-cluster-2-addon-iamservic-Role1-BPNRBOIS2NS3 --role-session-name s3-access-example'
                 sh 'aws s3 ls'    
             }
         }
