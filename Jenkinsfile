@@ -57,7 +57,7 @@ spec:
                  
               ''' 
                 sh '''
-                    
+                 set -x   
                  aws sts assume-role-with-web-identity \
  --role-arn $AWS_ROLE_ARN \
  --role-session-name mh9test \
