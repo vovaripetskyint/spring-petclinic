@@ -50,6 +50,7 @@ spec:
             steps {
                 container('mysql') {
                 sh 'apt update && apt install awscli -y'
+                sh 'aws sts get-caller-identity'    
                 sh 'aws s3 ls'    
             }
         }
