@@ -67,6 +67,7 @@ spec:
  export AWS_SECRET_ACCESS_KEY="$(cat /tmp/irp-cred.txt | jq -r ".Credentials.SecretAccessKey")"
  export AWS_SESSION_TOKEN="$(cat /tmp/irp-cred.txt | jq -r ".Credentials.SessionToken")"
  rm /tmp/irp-cred.txt
+ aws sts get-caller-identity
               '''      
                
                 sh 'aws sts get-caller-identity'    
