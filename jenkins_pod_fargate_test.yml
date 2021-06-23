@@ -5,21 +5,20 @@ metadata:
   labels:
     workload: jenkins-fargate
 spec:
-  serviceAccountName: myjenkins
   securityContext:
     runAsUser: 0
-    fsGroup: 0   
-     
-  
+    fsGroup: 0
+
+
   containers:
   - name: maven-fargate
     image: maven:3.6.0-jdk-8-alpine
     resources:
       requests:
-        memory: "2048Mi"
-        cpu: "1024m"
+        memory: "2Gi"
+        cpu: "512m"
       limits:
-        memory: "8192Mi"
+        memory: "8Gi"
         cpu: "4096m"
     command:
     - cat
