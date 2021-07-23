@@ -149,7 +149,7 @@ spec:
                                                     
                 sh '''
                     
-                helm repo add myrepo $S3_REPOSITORY_URL
+                helm repo add myrepo2 $S3_REPOSITORY_URL
                 helm repo list 
                 helm upgrade --install prodapp $HELM_CHART_NAME  --set container.image=$IMAGE_TAG --set replicaCount=1
               '''  
