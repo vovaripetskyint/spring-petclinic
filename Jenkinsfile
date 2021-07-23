@@ -62,7 +62,7 @@ spec:
     AWS_REGION        = "us-east-2"
     ECR_URL           = "https://676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp"
     IMAGE_TAG         = "676833452478.dkr.ecr.us-east-2.amazonaws.com/myapp:java_v_${env.BUILD_ID}"  
-    S3_REPOSITORY_URL = "s3://myvovastartup/Helm"    
+    S3_REPOSITORY_URL = "s3://myvovastartup/Helming"    
     HELM_CHART_NAME   = "myrepo2/application-ing" 
     HELM_HOME         = "/data/helm"
   // VERSION       = getVersion() 
