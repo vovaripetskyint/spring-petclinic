@@ -1,0 +1,14 @@
+version: 1.0
+install:
+  runtime-version:
+    java: corretto11
+build:
+  commands:
+    build:        
+      - mvn -DskipTests=true package
+   
+run:
+  command: java -jar target/*.jar --server.port=80
+  network: 
+    port: 80
+    env: 80
