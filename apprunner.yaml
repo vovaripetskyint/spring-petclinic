@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-version:
+      java: corretto11
+ 
+  build:
+    commands:
+       - mvn -DskipTests=true package
+       - echo Build started on `date`
+       - echo Building image...
+   
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - java -jar /target/*.jar --server.port=80
+ 
