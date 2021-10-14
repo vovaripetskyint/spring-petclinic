@@ -11,7 +11,7 @@ on:
     
 env:
   AWS_REGION: us-east-2                   # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+
   ECR_REPOSITORY: codedeploy
   IMAGE_TAG: ${{ github.sha }}E
   ECS_SERVICE: MY_ECS_SERVICE                 # set this to your Amazon ECS service name
@@ -52,8 +52,8 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to Amazon ECR
-#      env:
-#        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
 #        ECR_REPOSITORY: codedeploy
 #        IMAGE_TAG: ${{ github.sha }}
       run: |
