@@ -2,23 +2,23 @@
     "family": "",
     "taskRoleArn": "",
     "executionRoleArn": "",
-    "networkMode": "none",
+    "networkMode": "host",
     "containerDefinitions": [
         {
-            "name": "",
-            "image": "",
+            "name": "MY_CONTAINER_NAME",
+            "image": "nginx",
             "repositoryCredentials": {
                 "credentialsParameter": ""
             },
-            "cpu": 0,
-            "memory": 0,
+            "cpu": 256,
+            "memory": 512,
             "memoryReservation": 0,
             "links": [
                 ""
             ],
             "portMappings": [
                 {
-                    "containerPort": 0,
+                    "containerPort": 80,
                     "hostPort": 0,
                     "protocol": "tcp"
                 }
@@ -96,7 +96,7 @@
             "dependsOn": [
                 {
                     "containerName": "",
-                    "condition": "START"
+                    "condition": "HEALTHY"
                 }
             ],
             "startTimeout": 0,
@@ -129,7 +129,7 @@
             },
             "ulimits": [
                 {
-                    "name": "rss",
+                    "name": "core",
                     "softLimit": 0,
                     "hardLimit": 0
                 }
@@ -168,7 +168,7 @@
                 }
             ],
             "firelensConfiguration": {
-                "type": "fluentd",
+                "type": "fluentbit",
                 "options": {
                     "KeyName": ""
                 }
@@ -221,8 +221,8 @@
     "requiresCompatibilities": [
         "EC2"
     ],
-    "cpu": "",
-    "memory": "",
+    "cpu": "256",
+    "memory": "512",
     "tags": [
         {
             "key": "",
@@ -230,7 +230,7 @@
         }
     ],
     "pidMode": "task",
-    "ipcMode": "task",
+    "ipcMode": "none",
     "proxyConfiguration": {
         "type": "APPMESH",
         "containerName": "",
