@@ -16,6 +16,10 @@
 
 package org.springframework.samples.petclinic.model;
 
+import org.junit.Assert;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.*;
+
 import java.util.Locale;
 import java.util.Set;
 
@@ -25,6 +29,7 @@ import javax.validation.Validator;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -56,6 +61,26 @@ class ValidatorTests {
         ConstraintViolation<Person> violation = constraintViolations.iterator().next();
         assertThat(violation.getPropertyPath().toString()).isEqualTo("firstName");
         assertThat(violation.getMessage()).isEqualTo("must not be empty");
+
+    }
+
+    @Test
+    public void first() {
+
+	    ChromeOptions chromeOptions = new ChromeOptions();
+	    chromeOptions.addArguments("--headless");
+	    chromeOptions.addArguments("--no-sandbox");
+	    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+	    ChromeDriver driver = new ChromeDriver(chromeOptions);
+	    driver.get("https://www.google.com");
+	    String title = driver.getTitle();
+	    Assert.assertTrue(title.equals("Google"));
+	    if (driver.getPageSource().contains("Google")) {
+                           System.out.println("PAAAASS!!!!");
+            } else {
+                           System.out.println("FAAAAAAIL!");
+            }
+	    driver.quit();
     }
 
 }
